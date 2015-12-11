@@ -89,7 +89,7 @@ module.exports = function( app, db ) {
 
                             // Verificando los elementos que entrega el query
                             console.log(row.id + ": " + row.firstname);
-                            row.url = "http:127.0.0.1:7070/api/v1/user/" + row.email +"/find";
+                            row.url = "http:127.0.0.1:7070/api/v1/user/profile/" + row.email;
                         });
 
                     // Adicionando a la cabecera `Content-Type` de `text/json`
@@ -486,25 +486,25 @@ module.exports = function( app, db ) {
 
     //Links de las rutas y las funciones
     // URI para crear usuario
-    app.post('/api/v1/user/create', createUser);
+    app.post('/api/v1/user/sign-up', createUser);
 
     // URI ingresar a la app
-    app.post('/api/v1/user/login', loginUser);
+    app.post('/api/v1/user/sign-in', loginUser);
 
     // URI para traer todos los usuarios
     app.get('/api/v1/user/list', findAllUsers);
 
     // URI para buscar usuario especifico por email
-    app.get('/api/v1/user/:email/find', findUser);
+    app.get('/api/v1/user/profile/:email', findUser);
 
     // URI para actualizar usuario
-    app.post('/api/v1/user/:email/update', updateUser);
+    app.post('/api/v1/user/update/:email', updateUser);
 
     // URI para actualizar usuario
-    app.post('/api/v1/user/:email/password', updatePasswordUser);
+    app.post('/api/v1/user/forgot-password/:email', updatePasswordUser);
 
     // URI para eliminar usuario
-    app.delete('/api/v1/user/:email/delete', deleteUser);
+    app.delete('/api/v1/user/delete/:email', deleteUser);
 
 
 
@@ -536,7 +536,7 @@ module.exports = function( app, db ) {
                 rows.forEach(function (row) {
 
                     console.log(row.id + ': ' + row.name);
-                    row.url = "http:127.0.0.1:7070/api/v1/product/" + row.id +"/find";
+                    row.url = "http:127.0.0.1:7070/api/v1/product/detail/" + row.id;
                 });
 
                 // Adicionando a la cabecera `Content-Type` de `application/json`
@@ -783,13 +783,13 @@ module.exports = function( app, db ) {
     app.post('/api/v1/product/create', createProduct);
 
     // URI para buscar por ID especifico
-    app.get('/api/v1/product/:id/find', findProduct);
+    app.get('/api/v1/product/detail/:id', findProduct);
 
     // URI para actualizar un producto
-    app.post('/api/v1/product/:id/update', updateProduct);
+    app.post('/api/v1/product/update/:id', updateProduct);
 
     // URI para eliminar un producto
-    app.delete('/api/v1/product/:id/delete', deleteProduct);
+    app.delete('/api/v1/product/delete/:id', deleteProduct);
 
     // Close DB
     var closeDb = function() {
